@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 50
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -19,7 +21,7 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
-          registry: ghcr.io
+          registry: https://docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
@@ -28,5 +30,5 @@ jobs:
           context: .
           push: true
           tags: |
-            tiwariav/node-with-aws-cli:latest
-            ghcr.io/tiwariav/node-with-aws-cli
+            tiwariav/dockers/node-with-aws-cli:latest
+            docker.pkg.github.com/tiwariav/dockers/node-with-aws-cli:latest
