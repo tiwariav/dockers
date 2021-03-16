@@ -11,3 +11,6 @@ RUN unzip awscliv2.zip
 
 # Run AWS install
 RUN ./aws/install
+
+# Install pip packages
+RUN pip install pytz
