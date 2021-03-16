@@ -1,4 +1,4 @@
-FROM node:latest
+FROM python:slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
