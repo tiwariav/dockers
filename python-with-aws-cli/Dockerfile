@@ -13,4 +13,4 @@ RUN unzip awscliv2.zip
 RUN ./aws/install
 
 # Install pip packages
-RUN pip install pytz
+RUN pip install pytz requests toml
