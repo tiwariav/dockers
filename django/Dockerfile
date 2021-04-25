@@ -1,9 +1,12 @@
 #TODO: add production stage
 
-FROM python:3.8-slim as development
+FROM python:3.9-slim as development
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
+
+# Add root bin to PATH
+ENV PATH="/root/.local/bin:${PATH}"
 
 RUN apt update \
     # development dependencies
@@ -24,6 +27,3 @@ RUN python -m pip install --upgrade pip
 # install oh my zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && chsh -s $(which zsh)
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Add root bin to PATH
-ENV PATH="/root/.local/bin:${PATH}"
