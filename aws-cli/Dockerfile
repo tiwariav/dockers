@@ -15,7 +15,8 @@ RUN apk --no-cache add \
     glibc-${GLIBC_VER}.apk \
     glibc-bin-${GLIBC_VER}.apk \
     glibc-i18n-${GLIBC_VER}.apk \
-    && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
+    && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 \
+    && apk add --no-cache --upgrade grep
 
 # install awscli
 RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
