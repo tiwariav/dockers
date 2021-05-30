@@ -8,8 +8,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Add root bin to PATH
 ENV PATH="/root/.local/bin:${PATH}"
 
-# remove existing old versions
-RUN apt-get -y purge poppler-utils && apt-get -y autoremove
 RUN apt-get update \
     # development dependencies
     && apt-get install -y apt-utils curl git openssh-client wget zsh \
