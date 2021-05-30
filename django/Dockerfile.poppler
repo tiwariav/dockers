@@ -21,8 +21,8 @@ RUN apt-get update \
     # Translations dependencies
     gettext
 
-RUN wget https://poppler.freedesktop.org/poppler-$poppler_utils_version.tar.xz \
-    && tar -xJf poppler-$poppler_utils_version.tar.xz && cd poppler-$poppler_utils_version \
+RUN wget https://poppler.freedesktop.org/poppler-$POPPLER_UTILS_VERSION.tar.xz \
+    && tar -xJf poppler-$POPPLER_UTILS_VERSION.tar.xz && cd poppler-$POPPLER_UTILS_VERSION \
     && mkdir build && cd build && cmake .. && make && make install
 
 # cleaning up unused files
