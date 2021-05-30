@@ -17,8 +17,6 @@ RUN apt update \
     libpq-dev \
     # Translations dependencies
     gettext \
-    # pdf to html dependencies
-    pdftohtml \
     # cleaning up unused files
     && apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
