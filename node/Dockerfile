@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM node:16-slim
 
 RUN apt update \
     # development dependencies
