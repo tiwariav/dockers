@@ -10,7 +10,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 
 RUN apt update \
     # development dependencies
-    && apt install -y git curl apt-utils openssh-client zsh \
+    && apt install -y git git-extras curl apt-utils openssh-client zsh \
     # dependencies for building Python packages
     build-essential python3-dev \
     # psycopg2 dependencies
