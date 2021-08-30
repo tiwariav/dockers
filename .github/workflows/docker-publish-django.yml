@@ -1,4 +1,4 @@
-name: Docker
+name: Docker build and push django
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,15 +8,15 @@ name: Docker
 on:
   push:
     branches: [master]
-    # paths:
-    #   - "django/**"
+    paths:
+      - "django/**"
+      - ".github/workflows/*-django.yml"
   pull_request:
     branches: [master]
     paths:
       - "django/**"
 
 env:
-  # github.repository as <account>/<repo>
   IMAGE_NAME: tiwariav/django
 
 jobs:

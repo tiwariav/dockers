@@ -1,4 +1,4 @@
-name: Docker
+name: Docker build and push python-webhooks
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,15 +8,15 @@ name: Docker
 on:
   push:
     branches: [master]
-    # paths:
-    #   - "python-webhooks/**"
+    paths:
+      - "python-webhooks/**"
+      - ".github/workflows/*-python-webhooks.yml"
   pull_request:
     branches: [master]
     paths:
       - "python-webhooks/**"
 
 env:
-  # github.repository as <account>/<repo>
   IMAGE_NAME: tiwariav/python-webhooks
 
 jobs:

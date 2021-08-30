@@ -1,4 +1,4 @@
-name: Docker
+name: Docker build and push aws-cli
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,15 +8,15 @@ name: Docker
 on:
   push:
     branches: [master]
-    # paths:
-    #   - "aws-cli/**"
+    paths:
+      - "aws-cli/**"
+      - ".github/workflows/*-aws-cli*.yml"
   pull_request:
     branches: [master]
     paths:
       - "aws-cli/**"
 
 env:
-  # github.repository as <account>/<repo>
   IMAGE_NAME: tiwariav/aws-cli
 
 jobs:

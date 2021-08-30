@@ -1,4 +1,4 @@
-name: Docker
+name: Docker build and push django:poppler
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,15 +8,15 @@ name: Docker
 on:
   push:
     branches: [master]
-    # paths:
-    #   - "django/**"
+    paths:
+      - "django/**"
+      - ".github/workflows/*-django*.yml"
   pull_request:
     branches: [master]
     paths:
       - "django/**"
 
 env:
-  # github.repository as <account>/<repo>
   IMAGE_NAME: tiwariav/django
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: django
-          file: Dockerfile.poppler
+          file: django/Dockerfile.poppler
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.IMAGE_NAME }}:poppler
