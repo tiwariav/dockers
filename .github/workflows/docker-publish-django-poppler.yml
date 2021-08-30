@@ -61,4 +61,4 @@ jobs:
           file: Dockerfile.poppler
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: poppler
+          tags: ${{ env.IMAGE_NAME }}:poppler

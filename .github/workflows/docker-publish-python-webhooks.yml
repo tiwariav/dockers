@@ -60,4 +60,4 @@ jobs:
           context: python-webhooks
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: latest
+          tags: ${{ env.IMAGE_NAME }}:latest
