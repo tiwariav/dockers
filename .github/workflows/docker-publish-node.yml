@@ -1,4 +1,4 @@
-name: Docker build and push node
+name: Docker build node
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
