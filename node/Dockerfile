@@ -6,3 +6,6 @@ RUN apt update \
     # cleaning up unused files
     && apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
+
+# install sentri-cli
+RUN curl -sL https://sentry.io/get-cli/ | bash
