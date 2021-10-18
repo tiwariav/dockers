@@ -10,7 +10,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 
 RUN apt-get update \
     # development dependencies
-    && apt-get install -y apt-utils curl git git-extras openssh-client wget zsh \
+    && apt-get install -y apt-utils curl git git-extras nano openssh-client wget zsh \
     # dependencies for building poppler
     cmake libfreetype6-dev pkg-config libfontconfig-dev libjpeg-dev libopenjp2-7-dev \
     zlib1g-dev libssl-dev libcurl4-openssl-dev uuid-dev gperf libnss3-dev \
