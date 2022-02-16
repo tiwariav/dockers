@@ -1,6 +1,6 @@
 #TODO: add production stage
 
-FROM python:3.9-slim as development
+FROM python:3.10-slim as development
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
