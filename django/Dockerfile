@@ -21,9 +21,10 @@ RUN apt update \
     && apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
 
-# upgrade pip
-RUN python -m pip install --upgrade pip
-
 # install oh my zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && chsh -s $(which zsh)
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# upgrade pip
+RUN python -m pip install --upgrade pip
+RUN pip install tzdata
