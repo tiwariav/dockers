@@ -18,6 +18,8 @@ RUN apt-get update \
     build-essential python3-dev \
     # psycopg2 dependencies
     libpq-dev \
+    # pikepdf dependencies
+    libqpdf-dev \
     # Translations dependencies
     gettext
 
