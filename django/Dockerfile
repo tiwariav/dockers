@@ -13,6 +13,8 @@ RUN apt update \
     && apt install -y git git-extras curl apt-utils nano openssh-client zsh locales \
     # dependencies for building Python packages
     build-essential python3-dev \
+    # libxml dependencies
+    libxslt-dev \
     # psycopg2 dependencies
     libpq-dev \
     # Translations dependencies

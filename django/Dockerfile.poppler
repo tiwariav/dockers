@@ -16,10 +16,10 @@ RUN apt-get update \
     zlib1g-dev libssl-dev libcurl4-openssl-dev uuid-dev gperf libnss3-dev \
     # dependencies for building Python packages
     build-essential python3-dev \
+    # libxml dependencies
+    libxslt-dev \
     # psycopg2 dependencies
     libpq-dev \
-    # pikepdf dependencies
-    libqpdf-dev \
     # Translations dependencies
     gettext
 
