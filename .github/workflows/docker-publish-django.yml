@@ -9,8 +9,8 @@ on:
   push:
     branches: [master]
     paths:
-      - "django/**"
-      - ".github/workflows/*-django.yml"
+      - "django/Dockerfile"
+      - ".github/workflows/docker-publish-django.yml"
   pull_request:
     branches: [master]
     paths:

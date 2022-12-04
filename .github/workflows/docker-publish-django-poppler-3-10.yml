@@ -1,4 +1,4 @@
-name: Docker build django:poppler
+name: Docker build django:poppler-3.10
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -9,8 +9,8 @@ on:
   push:
     branches: [master]
     paths:
-      - "django/Dockerfile.poppler"
-      - ".github/workflows/docker-publish-django-poppler.yml"
+      - "django/Dockerfile.poppler-3.10"
+      - ".github/workflows/docker-publish-django-poppler-3-10.yml"
   pull_request:
     branches: [master]
     paths:
@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: django
-          file: django/Dockerfile.poppler
+          file: django/Dockerfile.poppler-3.10
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.IMAGE_NAME }}:poppler
+          tags: ${{ env.IMAGE_NAME }}:poppler-3.10

@@ -1,0 +1,41 @@
+FROM python:3.10-slim
+
+ARG POPPLER_UTILS_VERSION=21.05.0
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+# Add root bin to PATH
+ENV PATH="/root/.local/bin:${PATH}"
+
+RUN apt-get update \
+    # development dependencies
+    && apt-get install -y apt-utils curl git git-extras nano openssh-client wget zsh locales \
+    # dependencies for building poppler
+    cmake libfreetype6-dev pkg-config libfontconfig-dev libjpeg-dev libopenjp2-7-dev \
+    zlib1g-dev libssl-dev libcurl4-openssl-dev uuid-dev gperf libnss3-dev \
+    # dependencies for building Python packages
+    build-essential python3-dev \
+    # libxml dependencies
+    libxslt-dev \
+    # psycopg2 dependencies
+    libpq-dev \
+    # Translations dependencies
+    gettext
+
+RUN wget https://poppler.freedesktop.org/poppler-$POPPLER_UTILS_VERSION.tar.xz \
+    && tar -xJf poppler-$POPPLER_UTILS_VERSION.tar.xz && cd poppler-$POPPLER_UTILS_VERSION \
+    && mkdir build && cd build && cmake .. && make && make install
+
+# cleaning up unused files
+RUN apt-get install -y libpoppler-dev \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && rm -rf /var/lib/apt/lists/*
+
+# install oh my zsh
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && chsh -s $(which zsh)
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# upgrade pip
+RUN python -m pip install --upgrade pip
+RUN pip install tzdata
