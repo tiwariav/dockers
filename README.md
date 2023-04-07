@@ -10,3 +10,15 @@ docker buildx create --name multiarch
 docker buildx use multiarch
 docker buildx inspect --bootstrap
 docker buildx build -f Dockerfile.poppler -t tiwariav/django:poppler --platform linux/arm64,linux/amd64 .
+
+
+## linitng
+
+Install hadolint at system level
+https://github.com/hadolint/hadolint
+
+
+## github actions
+
+### reusable workflows
+https://docs.github.com/en/actions/using-workflows/reusing-workflows#example-reusable-workflow

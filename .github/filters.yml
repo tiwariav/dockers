@@ -1,0 +1,87 @@
+alpine-dev: &alpine-dev
+  - .github/workflows/build-images/build-alpine-dev.yml
+  - ./src/images/alpine-dev/**
+  - ./src/scripts/install-alpine-dev-pkgs.sh
+
+aws-cli:
+  - .github/workflows/build-images/build-aws-cli.yml
+  - ./src/images/aws-cli/**
+
+debian-dev: &debian-dev
+  - .github/workflows/build-images/build-debian-dev.yml
+  - ./src/images/debian-dev/**
+  - ./src/scripts/apt-install-clean.sh
+  - ./src/scripts/install-debian-dev-pkgs.sh
+
+django: &django
+  - .github/workflows/build-images/build-django.yml
+  - ./src/images/django/Dockerfile
+  - ./src/scripts/apt-install-clean.sh
+django-build-pip:
+  - .github/workflows/build-images/build-django-build-pip.yml
+  - ./src/images/django/Dockerfile.build-pip
+  - ./src/scripts/apt-install-clean.sh
+django-poppler: &django-poppler
+  - *django
+  - .github/workflows/build-images/build-django-poppler.yml
+  - ./src/images/django/Dockerfile.d.poppler
+
+django-alpine: &django-alpine
+  - .github/workflows/build-images/build-django-alpine.yml
+  - ./src/images/django/alpine/Dockerfile
+  - ./src/scripts/apt-install-clean.sh
+django-alpine-build-pip:
+  - .github/workflows/build-images/build-django-alpine-build-pip.yml
+  - ./src/images/django/alpine/Dockerfile.build-pip
+  - ./src/scripts/apt-install-clean.sh
+django-alpine-poppler: &django-alpine-poppler
+  - *django-alpine
+  - .github/workflows/build-images/build-django-alpine-poppler.yml
+  - ./src/images/django/alpine/Dockerfile.d.poppler
+
+django-dev:
+  - *django
+  - *debian-dev
+  - .github/workflows/build-images/build-django-dev.yml
+django-poppler-dev:
+  - *django-poppler
+  - *debian-dev
+  - .github/workflows/build-images/build-django-poppler-dev.yml
+django-alpine-dev:
+  - *django
+  - *alpine-dev
+  - .github/workflows/build-images/build-django-alpine-dev.yml
+django-alpine-poppler-dev:
+  - *django-alpine-poppler
+  - *alpine-dev
+  - .github/workflows/build-images/build-django-alpine-poppler-dev.yml
+
+docker:
+  - .github/workflows/build-images/build-docker.yml
+  - ./src/images/docker/**
+
+node-dev:
+  - .github/workflows/build-images/build-node-dev.yml
+  - ./src/images/node-dev/Dockerfile
+  - ./src/scripts/install-debian-dev-pkgs.sh
+node-dev-alpine:
+  - .github/workflows/build-images/build-node-dev-alpine.yml
+  - ./src/images/node-dev/Dockerfile.alpine
+  - ./src/scripts/install-alpine-dev-pkgs.sh
+
+node-sentry:
+  - .github/workflows/build-images/build-node-sentry.yml
+  - ./src/images/node-sentry/**
+
+python-dev:
+  - .github/workflows/build-images/build-python-dev.yml
+  - ./src/images/python-dev/Dockerfile
+  - ./src/scripts/install-debian-dev-pkgs.sh
+python-dev-alpine:
+  - .github/workflows/build-images/build-python-dev-alpine.yml
+  - ./src/images/python-dev/Dockerfile.alpine
+  - ./src/scripts/install-alpine-dev-pkgs.sh
+
+python-webhooks:
+  - .github/workflows/build-images/build-python-webhooks.yml
+  - ./src/images/python-webhooks/**

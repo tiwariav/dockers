@@ -1,0 +1,21 @@
+# Image with build dependencies for some django related packages
+
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+# hadolint ignore=DL3013
+RUN pip install -U --no-cache-dir pip
+
+COPY ./scripts/apt-install-clean.sh /tmp/apt-install-clean.sh
+RUN ./tmp/apt-install-clean.sh \
+    # dependencies for building Python packages \
+    build-essential python3-dev \
+    # libxml dependencies \
+    libxslt-dev \
+    # psycopg2 dependencies \
+    libpq-dev
+
+# remove temp tools
+RUN rm -r /tmp/*

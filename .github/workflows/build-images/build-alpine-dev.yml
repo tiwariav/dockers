@@ -1,0 +1,16 @@
+name: Docker build alpine-dev
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Docker build
+        uses: tiwariav/github-actions/docker-build@v1
+        with:
+          context: src
+          file: ./src/images/alpine-dev/Dockerfile
+          image: tiwariav/alpine-dev

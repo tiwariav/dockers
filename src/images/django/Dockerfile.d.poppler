@@ -1,0 +1,56 @@
+# Image to build custom poppler binaries for debian
+
+ARG FROM_IMAGE_TAG=latest
+ARG POPPLER_UTILS_VERSION=23.03.0
+
+# ---
+
+FROM tiwariav/django:$FROM_IMAGE_TAG as runtime
+
+COPY ./scripts/apt-install-clean.sh /tmp/apt-install-clean.sh
+RUN ./tmp/apt-install-clean.sh \
+    libtiff5 libfreetype6 libfontconfig libopenjp2-7 liblcms2-2 \
+    libnss3
+
+# ---
+
+FROM runtime as builder
+
+ARG POPPLER_UTILS_VERSION
+
+RUN ./tmp/apt-install-clean.sh \
+    wget build-essential cmake pkg-config gperf \
+    libboost-all-dev libopenjpip-dec-server libjpeg-dev \
+    libtiff-dev libopenjp2-7-dev libopenjp2-tools \
+    libcurl4-openssl-dev libpoppler-dev libssl-dev \
+    libcairo2-dev uuid-dev zlib1g-dev
+
+RUN wget -nv https://poppler.freedesktop.org/poppler-$POPPLER_UTILS_VERSION.tar.xz \
+    && tar -xJf poppler-$POPPLER_UTILS_VERSION.tar.xz \
+    && mkdir poppler-$POPPLER_UTILS_VERSION/build
+
+WORKDIR /poppler-$POPPLER_UTILS_VERSION/build
+
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_GTK_TESTS=OFF \
+    -DBUILD_QT5_TESTS=OFF -DBUILD_QT6_TESTS=OFF -DBUILD_CPP_TESTS=OFF \
+    -DBUILD_MANUAL_TESTS=OFF -DENABLE_GLIB=OFF -DENABLE_QT5=OFF \
+    -DENABLE_QT6=OFF -DENABLE_CPP=OFF -DGOBJECT_INTROSPECTION=OFF
+
+RUN make && make DESTDIR=/root/install install
+
+WORKDIR /root/install/usr/local/bin
+
+# remove all binaries except pdftohtml
+RUN find . ! -name 'pdftohtml' -type f -exec rm -f {} +
+
+# ---
+
+FROM runtime
+
+# copy the poppler built binaries
+COPY --from=builder /root/install /install
+
+RUN cp -rT install/usr/ /usr/ \
+    && rm -r install \
+    && ldconfig \
+    && rm -r /tmp/*

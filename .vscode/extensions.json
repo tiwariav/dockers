@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "jeff-hykin.better-dockerfile-syntax",
+        "ms-azuretools.vscode-docker",
+        "exiasr.hadolint"
+    ]
+}

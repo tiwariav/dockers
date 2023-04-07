@@ -1,0 +1,25 @@
+name: Build docker images
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*
+  pull_request:
+    branches: [master]
+
+jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      filters: ${{ steps.filter.outputs }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: .github/filters.yaml
+  call-build-aws-cli:
+    needs: paths-filter
+    if: needs.paths-filter.filters.aws-cli == 'true'
+    uses: ./.github/workflows/build-images/build-aws-cli.yml

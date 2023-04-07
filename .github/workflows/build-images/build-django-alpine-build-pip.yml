@@ -1,0 +1,17 @@
+name: Docker build django:alpine-build-pip
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Docker build
+        uses: tiwariav/github-actions/docker-build@v1
+        with:
+          context: src
+          file: ./src/images/django/alpine/Dockerfile.build-pip
+          image: tiwariav/django
+          suffix: alpine-build-pip

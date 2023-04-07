@@ -1,0 +1,10 @@
+# Image to build custom poppler binaries for debian
+
+ARG FROM_IMAGE_TAG=latest
+ARG POPPLER_UTILS_VERSION=23.03.0
+
+# ---
+
+FROM tiwariav/django:alpine-$FROM_IMAGE_TAG
+
+RUN apk add --no-cache poppler-utils

@@ -1,0 +1,17 @@
+name: Docker build django:poppler
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Docker build
+        uses: tiwariav/github-actions/docker-build@v1
+        with:
+          context: src
+          file: ./src/images/django/Dockerfile.d.poppler
+          image: tiwariav/django
+          suffix: poppler
