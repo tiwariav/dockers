@@ -61,4 +61,4 @@ jobs:
           file: django/Dockerfile.poppler
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.IMAGE_NAME }}:poppler
+          tags: ${{ env.IMAGE_NAME }}:0.1-poppler
