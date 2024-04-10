@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:20.12-slim
 
 RUN apt update \
     # development dependencies
