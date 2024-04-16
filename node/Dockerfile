@@ -1,4 +1,4 @@
-FROM node:20.12-slim
+FROM node:20-bullseye-slim
 
 RUN apt update \
     # development dependencies
